@@ -45,7 +45,7 @@ func clearTerminal() {
 
 func StoryLoop(story story.Story) {
 
-	a := story["intro"]
+	a := story["introduction"]
 
 	for {
 		clearTerminal()
