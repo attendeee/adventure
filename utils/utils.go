@@ -9,17 +9,21 @@ import (
 	"github.com/attendeee/adventure/story"
 )
 
-func printArc(a story.Arc) {
-	fmt.Printf("Title: %s\n", a.Title)
+var Reset = "\033[0m"
+var Red = "\033[31m"
+var Cyan = "\033[36m"
 
-	fmt.Printf("Story: \n")
+func printArc(a story.Arc) {
+	fmt.Printf("%sTitle:%s %s\n", Red, Reset, a.Title)
+
+	fmt.Printf("%sStory:%s \n", Red, Reset)
 	for _, s := range a.Story {
 		fmt.Printf("\t%s\n\n", s)
 	}
 
-	fmt.Printf("Options: \n")
+	fmt.Printf("%sOptions:%s \n", Cyan, Reset)
 	for i, o := range a.Options {
-		fmt.Printf("%d %s\n", i, o.Text)
+		fmt.Printf("%s%d%s %s\n", Cyan, i, Reset, o.Text)
 	}
 
 }
@@ -42,8 +46,9 @@ func StoryLoop(story story.Story) {
 		clearTerminal()
 
 		printArc(a)
+
 		if len(a.Options) == 0 {
-			os.Exit(0)
+			return
 		}
 
 		var c int
